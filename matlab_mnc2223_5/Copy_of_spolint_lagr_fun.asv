@@ -1,0 +1,79 @@
+%copia dello script spolintlagrfun che mostra tutti i grafici in una sola
+%image divisa in subplots,
+%la prima colonna mostra grafico ed errore con punti equispaziati mentre la
+%seconda colonna li mostra utilizzando i polinomi di chebychev
+clear all
+close all
+
+%setting per la funzione test: vedere le funzioni test
+%presenti nella cartella
+%funzione test ed estremi intervallo di definizione
+f =@(x) fun2(x);
+a=-5;
+b=5;
+
+%setting del grado del polinomio e dei punti di interpolazione
+n=50;
+    %n+1 punti equispaziati
+    ex=linspace(a,b,n+1);
+    %n+1 punti secondo la distribuzione di chebyshev (vedi funzione chebyshev)
+    cx=chebyshev(a,b,n+1);
+
+%n+1 osservazioni campionate dalla funzione test 
+ey=f(ex);
+cy=f(cx);
+
+%punti su cui valutare l'interpolante polinomiale modo 1
+m=20;
+xv=linspace(a,b,m*n+1);
+
+%valutazione nella II forma di Lagrange (vedi la function lagrval2)
+eyv=lagrval2(ey,ex,xv);
+cyv=lagrval2(cy,cx,xv);
+
+%valutazione funzione test nei punti di rappresentazione grafica
+yf=f(xv);
+
+figure(1);
+subplot(2,2,1) %in alto a destra: grafico del polinomio interpolante e della funzione
+hold on;
+%grafico funzione test
+plot(xv,yf,'r-','LineWidth',2);
+%grafico funzione polinomiale interpolante
+plot(xv,eyv,'g-','LineWidth',2);
+%disegno punti di interpolazione
+plot(ex,ey,'ro');
+
+%
+%grafico errore di interpolazione
+yerr=abs(yf-eyv); %errore assoluto
+subplot(2,2,3);
+hold on
+plot(xv,yerr,'g-','LineWidth',2);
+
+
+subplot(2,2,2)
+hold on;
+
+%grafico funzione test
+plot(xv,yf,'r-','LineWidth',2);
+
+%grafico funzione polinomiale interpolante
+plot(xv,cyv,'g-','LineWidth',2);
+
+%disegno punti di interpolazione
+plot(cx,cy,'ro');
+
+%grafico errore di interpolazione
+yerr=abs(yf-cyv); %errore assoluto
+subplot(2,2,4);
+hold on
+plot(xv,yerr,'g-','LineWidth',2);
+
+%grafico errore di interpolazione in scala logaritmica
+%figure(3);
+%semilogy(xv,yerr,'g-','LineWidth',2);
+
+%calcola e stampa max. dell'errore analitico in [a,b]
+error=max(yerr);
+fprintf('Errore interpolazione massimo: %22.15e',error);

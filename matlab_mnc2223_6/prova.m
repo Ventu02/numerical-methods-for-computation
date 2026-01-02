@@ -1,0 +1,1 @@
+err2_trapezi_comp("effe1",0,12,10);
