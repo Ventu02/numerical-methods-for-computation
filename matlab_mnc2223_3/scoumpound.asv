@@ -1,0 +1,9 @@
+fprintf("n/Alg      **Alg1**        **Alg2**        **Alg3**        **Alg4**        **Alg5**\n");
+[alg1, alg2, alg3, alg4, alg5]=fcompound(50,0.005);
+fprintf("%d %14.7e      %14.7e      %14.7e      %14.7e      %14.7e\n" + ...
+    , n, alg1, alg2,alg3, alg4,alg5);
+[alg1, alg2, alg3, alg4, alg5]=fcompound(50,0.005);
+[alg1, alg2, alg3, alg4, alg5]=fcompound(50,0.005);
+[alg1, alg2, alg3, alg4, alg5]=fcompound(50,0.005);
+[alg1, alg2, alg3, alg4, alg5]=fcompound(50,0.005);
+[alg1, alg2, alg3, alg4, alg5]=fcompound(50,0.005);

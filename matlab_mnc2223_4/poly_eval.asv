@@ -1,0 +1,13 @@
+function y=poly_eval(c,x)
+n = length(c)-1; %il grado è dato dal  numero di coefficienti -1 (es: tre coeffcienti significa che ha grado 2)
+m = length(x); %lunghezza dell'array contenente le x in cui valutare il polinomio
+y = ones(1,m);
+for i = 1:m
+    %l'ordine dei coefficienti è inverso perchè è il primo coefficiente ad
+    %avere grado massimo
+p = c(1);%p=c(length(c));
+    for k = 1:n %for k = n:1
+        p = c(k) + x(i)*p;
+    end
+y(1,i) = p;
+end
